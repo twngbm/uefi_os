@@ -17,3 +17,5 @@ $ cp gnu-efi/x86_64/bootloader/main.efi fs:/EFI/BOOT/BOOTX64.EFI
 $ cp kernel/bin/kernel.elf fs:/
 $ cp kernel/bin/zap-light16.psf fs:/
 ```
+## Reference
+[Absurdponcho/PonchoOS](https://github.com/Absurdponcho/PonchoOS/tree/main)
