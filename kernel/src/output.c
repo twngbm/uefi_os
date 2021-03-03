@@ -1,4 +1,5 @@
 #include "output.h"
+#include "kernel_static.h"
 void cls()
 {
 

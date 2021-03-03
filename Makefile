@@ -28,6 +28,7 @@ $(BUILDDIR)/$(OSNAME): $(GNUEFI_BOOTLOADER_BIN) $(KERNEL_BIN) $(KERNEL_SUPPORT)
 	mcopy -i $(BUILDDIR)/$(OSNAME) $(OVMF)/startup.nsh ::
 	mcopy -i $(BUILDDIR)/$(OSNAME) $(KERNEL_BIN) ::
 	for file in $(KERNEL_SUPPORT)/*;do mcopy -i $(BUILDDIR)/$(OSNAME) $${file} :: ;done
+	@echo "\033[0;31m MAKE SUCCESS \033[0m"
 
 $(GNUEFI_BOOTLOADER_BIN): $(GNUEFI)/bootloader/*
 	@echo "\033[0;31m Build UEFI Bootloader \033[0m"
@@ -38,7 +39,7 @@ $(KERNEL_BIN): $(KERNEL)/src/* $(KERNEL)/support/*
 	cd $(KERNEL) && make
 
 usb: $(GNUEFI_BOOTLOADER_BIN) $(KERNEL_BIN) $(KERNEL_SUPPORT)
-	@echo "\033[0;31m Make USB Bootable Directiory \033[0m"
+	@echo "\033[0;31m Make USB Bootable Directory \033[0m"
 	@rm -f -r $(USBDIR)
 	@mkdir $(USBDIR)
 	@mkdir $(USBDIR)/EFI
@@ -47,6 +48,7 @@ usb: $(GNUEFI_BOOTLOADER_BIN) $(KERNEL_BIN) $(KERNEL_SUPPORT)
 	cp $(OVMF)/startup.nsh $(USBDIR)/
 	cp $(KERNEL_BIN) $(USBDIR)/
 	for file in $(KERNEL_SUPPORT)/*;do cp $${file} $(USBDIR)/ ;done
+	@echo "\033[0;31m MAKE SUCCESS \033[0m"
 
 clean:
 	@echo "\033[0;31m Cleanup \033[0m"
@@ -54,6 +56,10 @@ clean:
 	@rm -f -r $(USBDIR)
 	cd $(GNUEFI) && make bootloader clean && make clean
 	cd $(KERNEL) && make clean
-	
+
+clean_kernel:
+	@echo "\033[0;31m Cleanup Kernel \033[0m"
+	cd $(KERNEL) && make clean
+
 run:
 	qemu-system-x86_64 -drive file=$(BUILDDIR)/$(OSNAME) -m $(QEMU_MEMORYSIZE) -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMF)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMF)/OVMF_VARS-pure-efi.fd" -net none -vga std

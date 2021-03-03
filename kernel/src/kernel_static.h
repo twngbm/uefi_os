@@ -1,8 +1,11 @@
 #include <stdint.h>
 #include "kernel_struct.h"
-Framebuffer *framebuffer;
-PSF1_FONT *psf1_font;
-uint32_t cours_x;
-uint32_t cours_y;
-
-extern const char *EFI_MEMORY_TYPE_STRINGS[];
+#ifndef KERNEL_STATIC
+#define KERNEL_STATIC
+extern Framebuffer *framebuffer;
+extern PSF1_FONT *psf1_font;
+extern uint32_t cours_x;
+extern uint32_t cours_y;
+extern uint32_t memSize;
+extern char *EFI_MEMORY_TYPE_STRINGS[];
+#endif

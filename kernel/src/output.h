@@ -1,15 +1,12 @@
 #include "kernel_struct.h"
+#include "kernel_static.h"
 #ifndef OUTPUT
 #define OUTPUT
-extern Framebuffer *framebuffer;
-extern PSF1_FONT *psf1_font;
-extern uint32_t cours_x;
-extern uint32_t cours_y;
 
-void cls();
+extern void cls();
 
-void putChar(unsigned int colour, char chr, const unsigned int xOff, const unsigned int yOff);
+extern void putChar(unsigned int colour, char chr, const unsigned int xOff, const unsigned int yOff);
 
-void Kprint(unsigned int colour, char *str, int newline);
+extern void Kprint(unsigned int colour, char *str, int newline);
 
 #endif

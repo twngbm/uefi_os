@@ -17,13 +17,13 @@ DIRS = $(wildcard $(SRCDIR)/*)
 
 all: $(OBJS)
 	@ echo !==== LINKING
-	@-mkdir $(BUILDDIR)
+	@mkdir -p $(BUILDDIR)
 	$(LD) $(LDFLAGS) -o $(BUILDDIR)/kernel.elf $(OBJS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@-mkdir $(OBJDIR)
-	@ echo !==== COMPILING $^
-	$(CC) $(CFLAGS) -c -o $@ $^
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
+	@mkdir -p $(OBJDIR)
+	@ echo !==== COMPILING $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	@rm -r -f $(BUILDDIR)	
