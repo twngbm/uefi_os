@@ -1,7 +1,7 @@
 #include <stdint.h>
 #ifndef KERNEL_STRUCT
 #define KERNEL_STRUCT
-typedef unsigned long long size_t;
+//typedef unsigned long long size_t;
 typedef struct
 {
     uint32_t Type;
@@ -11,27 +11,10 @@ typedef struct
     uint64_t attribs;
 } EFI_MEMORY_DESCRIPTOR;
 
-char EFI_MEMORY_TYPE_STRINGS[][40] = {
-    "EfiReservedMemoryType",
-    "EfiLoaderCode",
-    "EfiLoaderData",
-    "EfiBootServicesCode",
-    "EfiBootServicesData",
-    "EfiRuntimeServicesCode",
-    "EfiRuntimeServicesData",
-    "EfiConventionalMemory",
-    "EfiUnusableMemory",
-    "EfiACPIReclaimMemory",
-    "EfiACPIMemoryNVS",
-    "EfiMemoryMappedIO",
-    "EfiMemoryMappedIOPortSpace",
-    "EfiPalCode",
-};
-
 typedef struct
 {
     void *BaseAddress;
-    size_t BufferSize;
+    unsigned long long BufferSize;
     unsigned int Width;
     unsigned int Height;
     unsigned int PixelsPerScanline;
