@@ -22,7 +22,7 @@ void _start(BootInfo *bootInfo)
     Kprint(0xffffffff, hex_to_string(0x1234567890abcdef, 8), 1);
 */
     uint64_t mMapEntries = bootInfo->mMapSize / bootInfo->mMapDescSize;
-    memSize = GetMemorySize(bootInfo->mMap, mMapEntries, bootInfo->mMapDescSize);
+    memSize = getMSize(bootInfo->mMap, mMapEntries, bootInfo->mMapDescSize);
     Kprint(0xffff00ff, int_to_string(memSize), 0);
     Kprint(0xffff00ff, " KB in Total.", 1);
     for (int i = 0; i < mMapEntries; i++)

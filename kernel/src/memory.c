@@ -1,7 +1,7 @@
 #include "memory.h"
 #include "kernel_struct.h"
 #include <stdint.h>
-uint64_t GetMemorySize(EFI_MEMORY_DESCRIPTOR *mMap, uint64_t mMapEntries, uint64_t mMapDescSize)
+uint64_t getMSize(EFI_MEMORY_DESCRIPTOR *mMap, uint64_t mMapEntries, uint64_t mMapDescSize)
 {
     static uint64_t memorySizeBytes = 0;
     if (memorySizeBytes > 0)
@@ -15,3 +15,5 @@ uint64_t GetMemorySize(EFI_MEMORY_DESCRIPTOR *mMap, uint64_t mMapEntries, uint64
     }
     return memorySizeBytes;
 }
+
+
